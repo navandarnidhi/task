@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>Edit Task</h2>
+
+<mat-dialog-content style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+
+  <!-- Task Name -->
+  <mat-form-field appearance="fill" class="task-field task-name">
+    <mat-label>Task Name</mat-label>
+    <input matInput [(ngModel)]="task.name" />
+  </mat-form-field>
+
+  <!-- Priority -->
+  <mat-form-field appearance="fill" class="task-field priority-field">
+    <mat-label>Priority</mat-label>
+    <mat-select [(ngModel)]="task.priority" panelClass="priority-dropdown">
+      <mat-option value="low">Low</mat-option>
+      <mat-option value="medium">Medium</mat-option>
+      <mat-option value="high">High</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Status -->
+  <mat-form-field appearance="fill" class="task-field status-field">
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="task.status" panelClass="priority-dropdown">
+      <mat-option value="to do">To Do</mat-option>
+      <mat-option value="in progress">In Progress</mat-option>
+      <mat-option value="done">Done</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Start Date -->
+<mat-form-field appearance="fill" class="task-field date-field">
+  <mat-label>Start Date</mat-label>
+  <input matInput [matDatepicker]="startPicker" [(ngModel)]="task.startDate" (dateChange)="updateDaysFromDates()">
+  <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+  <mat-datepicker #startPicker></mat-datepicker>
+</mat-form-field>
+
+<!-- End Date -->
+<mat-form-field appearance="fill" class="task-field date-field">
+  <mat-label>End Date</mat-label>
+  <input matInput [matDatepicker]="endPicker" [(ngModel)]="task.endDate" (dateChange)="updateDaysFromDates()">
+  <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+  <mat-datepicker #endPicker></mat-datepicker>
+</mat-form-field>
+
+<!-- Days -->
+<mat-form-field appearance="fill" class="task-field days-field">
+  <mat-label>Days</mat-label>
+  <input matInput type="number" [(ngModel)]="task.days" (input)="updateEndDateFromDays()" />
+</mat-form-field>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" style="gap: 8px;">
+  <div class="example-label" style="margin-bottom: 3rem; text-align: center;">
+    <button mat-flat-button [style.background]="'#4caf50'" color="primary" (click)="save()" type="submit">
+      Save
+    </button>
+    <button mat-flat-button [style.background]="'#cd5c5c'" type="button" (click)="cancel()">
+      Cancel
+    </button>
+  </div>
+</mat-dialog-actions>

@@ -1,0 +1,88 @@
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+">
+  <img src="assets/BG.jpg" 
+       style="
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         filter: blur(8px);
+       " />
+</div>
+
+<div 
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+  "
+>
+
+  <mat-card class="mat-elevation-z12" style="width: 500px; padding: 20px; border-radius: 16px; text-align: center;">
+    <!-- Header -->
+    <div style="margin-bottom: 32px;">
+      <h1 style="font-size: 30px; font-weight: 700; color: #1976d2; margin-bottom: 10px;">Welcome Back</h1>
+      <p style="font-size: 16px; color: #555; margin: 0;">Please login to continue</p>
+    </div>
+
+    <!-- Form -->
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; gap: 24px;">
+
+        <!-- Email Field -->
+        <mat-form-field appearance="outline" color="primary" style="width: 100%;">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Enter your email">
+          <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            Valid email is required
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Password Field -->
+        <mat-form-field appearance="outline" color="accent" style="width: 100%;">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Enter your password">
+          <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Login Button -->
+        <div style="display: flex; justify-content: center; margin-top: 10px;">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="loginForm.invalid"
+            style="
+              width: 50%;
+              padding: 14px;
+              font-size: 16px;
+              font-weight: 600;
+              background: linear-gradient(135deg, #42a5f5, #478ed1);
+              color: white;
+              transition: transform 0.2s, box-shadow 0.2s;
+            "
+            matRippleColor="rgba(255,255,255,0.3)">
+            Login
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+
+    <!-- Sign Up -->
+    <mat-card-actions style="justify-content: center; margin-top: 20px;">
+      <span style="font-size: 14px; color: #555;">Don't have an account?</span>
+      <a routerLink="/signup" style="margin-left: 4px; color: #1976d2; font-weight: 600;">Sign Up</a>
+    </mat-card-actions>
+  </mat-card>
+</div>

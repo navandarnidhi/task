@@ -1,0 +1,32 @@
+/* Layout for each field row */
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+/* The text side */
+.field-label {
+  flex: 1;
+  font-size: 14px;
+}
+
+/* Fade edit icon until hovered */
+.edit-btn mat-icon {
+  opacity: 0.25;
+  font-size: 18px !important;
+  transition: opacity 0.25s ease, transform 0.2s ease;
+}
+
+/* On row hover, brighten icon */
+.field-row:hover .edit-btn mat-icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Reduce button footprint slightly */
+.edit-btn {
+  width: 32px !important;
+  height: 32px !important;
+}

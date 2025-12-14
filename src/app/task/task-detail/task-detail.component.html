@@ -1,0 +1,100 @@
+<div style="padding:24px; width:100%; box-sizing:border-box;">
+  <mat-card style="background: rgba(255,255,255,0.95); padding: 24px; width:100%; box-sizing:border-box;">
+    <h2>TASK DETAILS</h2>
+
+    <div style="display:flex; flex-wrap:wrap; gap:24px;">
+      <div
+        *ngFor="let field of editableFields"
+        style="flex: 1 1 45%; min-width: 250px; display:flex; flex-direction:column; gap:8px;">
+        <div *ngIf="!editModeMap[field]" class="field-row" style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <ng-container *ngIf="field === 'days'">
+              <strong>{{ fieldLabels[field] }}:</strong> {{ task.days || calculateDays() || 0 }}
+            </ng-container>
+            <ng-container *ngIf="field === 'startDate' || field === 'endDate'">
+              <strong>{{ fieldLabels[field] }}:</strong> {{ task[field] | date:'mediumDate' }}
+            </ng-container>
+            <ng-container *ngIf="field !== 'days' && field !== 'startDate' && field !== 'endDate'">
+              <strong>{{ fieldLabels[field] }}:</strong> {{ task[field] }}
+            </ng-container>
+          </div>
+          <button mat-icon-button color="primary" class="edit-btn" (click)="editField(field)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+
+        <div *ngIf="editModeMap[field]">
+          <mat-form-field *ngIf="field==='priority'" appearance="outline" style="width:100%">
+            <mat-label>{{ fieldLabels[field] }}</mat-label>
+            <mat-select [(ngModel)]="task.priority">
+              <mat-option value="low">Low</mat-option>
+              <mat-option value="medium">Medium</mat-option>
+              <mat-option value="high">High</mat-option>
+            </mat-select>
+            <button mat-button color="primary" (click)="saveField(field)">Save</button>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="field==='status'" appearance="outline" style="width:100%">
+            <mat-label>{{ fieldLabels[field] }}</mat-label>
+            <mat-select [(ngModel)]="task.status">
+              <mat-option value="to do">To Do</mat-option>
+              <mat-option value="in progress">In Progress</mat-option>
+              <mat-option value="done">Done</mat-option>
+            </mat-select>
+            <button mat-button color="primary" (click)="saveField(field)">Save</button>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="field==='startDate'" appearance="outline" style="width:100%">
+            <mat-label>{{ fieldLabels[field] }}</mat-label>
+            <input matInput [matDatepicker]="startPicker" [(ngModel)]="task.startDate" (ngModelChange)="task.days = calculateDays()" />
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker touchUi></mat-datepicker>
+            <button mat-button color="primary" (click)="saveField(field)">Save</button>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="field==='endDate'" appearance="outline" style="width:100%">
+            <mat-label>{{ fieldLabels[field] }}</mat-label>
+            <input matInput [matDatepicker]="endPicker" [(ngModel)]="task.endDate" (ngModelChange)="task.days = calculateDays()" />
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker touchUi></mat-datepicker>
+            <button mat-button color="primary" (click)="saveField(field)">Save</button>
+          </mat-form-field>
+
+          <mat-form-field
+            *ngIf="field !== 'priority' && field !== 'status' && field !== 'startDate' && field !== 'endDate'" appearance="outline" style="width:100%">
+            <mat-label>{{ fieldLabels[field] }}</mat-label>
+
+            <ng-container *ngIf="field==='storyPoint' || field==='epicPoint' || field==='specification' || field==='comments'">
+              <textarea matInput rows="3" [(ngModel)]="task[field]"></textarea>
+            </ng-container>
+
+            <ng-container *ngIf="field !== 'storyPoint' && field !== 'epicPoint' && field !== 'specification' && field !== 'comments'">
+              <input
+                matInput
+                [type]="field==='estimatedTime' || field==='spentTime' || field==='days' ? 'number' : 'text'"
+                [(ngModel)]="task[field]"
+              />
+            </ng-container>
+
+            <button mat-button color="primary" (click)="saveField(field)">Save</button>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px; flex-wrap:wrap; gap:10px;">
+      <button mat-stroked-button color="primary" (click)="goBack()">← Back to Tasks</button>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button mat-raised-button color="accent" (click)="uploadFile()">
+          <mat-icon>upload</mat-icon> Upload
+        </button>
+
+        <button mat-raised-button color="warn" (click)="downloadFile()">
+          <mat-icon>download</mat-icon> Download
+        </button>
+      </div>
+    </div>
+
+  </mat-card>
+</div>

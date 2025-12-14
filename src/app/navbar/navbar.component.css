@@ -1,0 +1,47 @@
+/* .task-filter-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.task-filter-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  flex-wrap: nowrap;
+  padding: 16px;
+}
+
+.add-task-btn,
+.filter-btn {
+  padding: 10px 24px;
+  font-weight: 600;
+}
+
+.add-task-btn {
+  background: linear-gradient(135deg, #42a5f5, #478ed1);
+  color: #fff;
+}
+
+.filter-btn {
+  background: #ffca28;
+  color: #000;
+}
+
+/* Responsive: stack vertically on small screens */
+/* @media (max-width: 600px) {
+  .task-filter-card {
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .add-task-btn,
+  .filter-btn {
+    width: 100%;
+  }
+} */ 

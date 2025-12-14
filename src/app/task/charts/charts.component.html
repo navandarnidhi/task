@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+<div style="position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; overflow:hidden;">
+  <img src="assets/Engine.jpg" style="width:100%; height:100%; object-fit:cover;" />
+</div>
+
+<div style="padding:24px; max-width:1400px; margin:auto;">
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-top:40px;">
+    <div style="width:300px; background:rgba(255,255,255,0.9); padding:20px; border-radius:8px;">
+      <h3>Status Distribution</h3>
+      <p style="font-size:12px; color:#666; margin:0 0 10px 0;">Click on a segment to filter</p>
+      <canvas baseChart [data]="statusChartData" [type]="'doughnut'" [options]="chartOptions" (chartClick)="onStatusChartClick($event)" style="cursor:pointer;"></canvas>
+    </div>
+    <div style="width:400px; background:rgba(255,255,255,0.9); padding:20px; border-radius:8px;">
+      <h3>Tasks by Priority</h3>
+      <div style="display:flex; gap:10px; margin-bottom:15px; justify-content:center;">
+        <button 
+          (click)="togglePriority('high')" 
+          [style.background-color]="selectedPriorities.has('high') ? '#f44336' : '#cccccc'"
+          [style.color]="selectedPriorities.has('high') ? 'white' : '#666'"
+          [style.border]="'none'"
+          [style.padding]="'8px 16px'"
+          [style.border-radius]="'4px'"
+          [style.cursor]="'pointer'"
+          [style.font-size]="'12px'"
+          [style.font-weight]="selectedPriorities.has('high') ? 'bold' : 'normal'">
+          High
+        </button>
+        <button 
+          (click)="togglePriority('medium')" 
+          [style.background-color]="selectedPriorities.has('medium') ? '#ff9800' : '#cccccc'"
+          [style.color]="selectedPriorities.has('medium') ? 'white' : '#666'"
+          [style.border]="'none'"
+          [style.padding]="'8px 16px'"
+          [style.border-radius]="'4px'"
+          [style.cursor]="'pointer'"
+          [style.font-size]="'12px'"
+          [style.font-weight]="selectedPriorities.has('medium') ? 'bold' : 'normal'">
+          Medium
+        </button>
+        <button 
+          (click)="togglePriority('low')" 
+          [style.background-color]="selectedPriorities.has('low') ? '#4caf50' : '#cccccc'"
+          [style.color]="selectedPriorities.has('low') ? 'white' : '#666'"
+          [style.border]="'none'"
+          [style.padding]="'8px 16px'"
+          [style.border-radius]="'4px'"
+          [style.cursor]="'pointer'"
+          [style.font-size]="'12px'"
+          [style.font-weight]="selectedPriorities.has('low') ? 'bold' : 'normal'">
+          Low
+        </button>
+      </div>
+      <canvas baseChart [data]="priorityChartData" [type]="'bar'" [options]="priorityChartOptions" style="cursor:pointer;"></canvas>
+    </div>
+    <div style="width:500px; background:rgba(255,255,255,0.9); padding:20px; border-radius:8px;">
+      <h3>Task Durations (Days)</h3>
+      <p style="font-size:12px; color:#666; margin:0 0 10px 0;">Click on a bar to filter</p>
+      <canvas baseChart [data]="durationChartData" [type]="'bar'" [options]="durationChartOptions" style="cursor:pointer;"></canvas>
+    </div>
+  </div>
+</div>

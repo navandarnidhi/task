@@ -1,0 +1,23 @@
+<mat-toolbar class="navbar mat-elevation-z6" style="color:white; padding:0 24px;">
+  <nav style="display:flex; align-items:center; width:100%;">
+
+    <div style="display:flex; gap:20px;">
+      <a mat-button routerLink="/task" routerLinkActive="active" class="nav-link">
+        Task
+      </a>
+      <a mat-button routerLink="/calendar" routerLinkActive="active" class="nav-link">
+        Calendar
+      </a>
+      <a mat-button routerLink="/charts" routerLinkActive="active" class="nav-link">
+        Charts
+      </a>
+    </div>
+
+    <span style="flex-grow:1;"></span>
+
+    <button mat-icon-button color="warn" aria-label="Sign Out" (click)="signOut()">
+      <mat-icon>logout</mat-icon>
+    </button>
+
+  </nav>
+</mat-toolbar>

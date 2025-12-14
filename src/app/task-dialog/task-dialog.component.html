@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Add New Task</h2>
+
+<form [formGroup]="taskForm" (ngSubmit)="save()" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Task Name</mat-label>
+    <input matInput formControlName="name" placeholder="Enter task name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Priority</mat-label>
+    <mat-select formControlName="priority">
+      <mat-option value="low">Low</mat-option>
+      <mat-option value="medium">Medium</mat-option>
+      <mat-option value="high">High</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option value="to do">To Do</mat-option>
+      <mat-option value="in progress">In Progress</mat-option>
+      <mat-option value="done">Done</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Date Range -->
+  <mat-form-field appearance="fill">
+    <mat-label>Select Date Range</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate formControlName="startDate" placeholder="Start date">
+      <input matEndDate formControlName="endDate" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+
+  <!-- Number of Days (readonly, auto-calculated) -->
+  <mat-form-field appearance="fill">
+    <mat-label>Number of Days</mat-label>
+    <input matInput type="number" formControlName="days" readonly>
+  </mat-form-field>
+
+  <!-- <div style="margin-bottom: 3rem; text-align: center;">
+    <button mat-flat-button color="primary" [style.background]="'#4caf50'" type="submit">Save</button>
+    <button mat-flat-button color="warn" [style.background]="'#cd5c5c'" type="button" (click)="cancel()">Cancel</button>
+  </div> -->
+
+  <mat-dialog-actions align="end" style="gap: 8px;">
+  <div class="example-label" style="margin-bottom: 3rem; text-align: center;">
+    <button mat-flat-button [style.background]="'#4caf50'" color="primary" (click)="save()" type="submit">
+      Save
+    </button>
+    <button mat-flat-button [style.background]="'#cd5c5c'" type="button" (click)="cancel()">
+      Cancel
+    </button>
+  </div>
+</mat-dialog-actions>
+
+</form>
